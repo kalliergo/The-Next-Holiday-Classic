@@ -34,7 +34,6 @@ export default function Footer() {
               <div className="text-xs uppercase tracking-[0.22em] text-[#d6b56a] mb-2">Legal</div>
               <Link href="/rules" className="text-sm text-white/70 hover:text-[#d6b56a] transition-colors">Official Rules</Link>
               <Link href="/privacy" className="text-sm text-white/70 hover:text-[#d6b56a] transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-sm text-white/70 hover:text-[#d6b56a] transition-colors">Terms of Service</Link>
             </div>
           </div>
 
