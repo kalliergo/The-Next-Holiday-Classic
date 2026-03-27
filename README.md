@@ -12,7 +12,9 @@ A modern Next.js web application for the "Next Holiday Classic" song competition
 
 - **Song Voting** — Browse and vote for songs across different competition rounds
 - **Song Submissions** — Submit your own original songs for consideration
+- **Live Radio** — Listen to the competition station
 - **Admin Dashboard** — Manage submissions, view results, and track competition progress
+- **Privacy & Rules** — Full contest rules and privacy policy pages
 - **Responsive Design** — Works seamlessly on desktop, tablet, and mobile devices
 
 ## 🛠 Tech Stack
@@ -86,14 +88,17 @@ client/
 │   ├── page.tsx              # Homepage with song voting
 │   ├── admin/                # Admin dashboard
 │   ├── submit/               # Song submission form
+│   ├── radio/                # Live radio streaming
 │   ├── privacy/              # Privacy policy page
 │   └── rules/                # Contest rules page
+├── components/
+│   ├── Navbar.tsx            # Navigation component
+│   └── Footer.tsx            # Footer component
 ├── lib/
 │   └── supabase-browser.ts   # Supabase client initialization
 ├── public/                   # Static assets
 ├── supabase-schema.sql       # Database schema & RLS policies
 ├── package.json
-├── tailwind.config.ts
 └── tsconfig.json
 ```
 
