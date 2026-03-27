@@ -178,7 +178,7 @@ export default function Page() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0b0a09] text-white">
+    <div className="min-h-screen bg-[#0b0a09] text-white mt-16 md:mt-20">
       <audio ref={audioRef} preload="none" />
       <section className="border-b border-white/10 bg-[linear-gradient(180deg,#0f0d0b_0%,#0b0a09_100%)]">
         <div className="mx-auto max-w-7xl px-6 py-16 text-center">
