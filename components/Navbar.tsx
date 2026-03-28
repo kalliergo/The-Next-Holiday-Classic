@@ -1,140 +1,99 @@
-'use client';
-
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function Navbar() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // Track scrolling to apply smooth transition effects
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 20;
-      setIsScrolled(scrolled);
-      
-      // Close mobile menu smoothly if the user starts scrolling
-      if (scrolled && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobileMenuOpen]);
-
-  const navLinks = [
-    { name: 'Semifinalists', href: '/#listen' },
-    { name: 'Podcast', href: '/#podcast' },
-    { name: 'Judges', href: '/#judges' },
-    { name: 'Radio', href: '/radio' },
-    { name: 'Rules', href: '/rules' },
-    { name: 'Privacy', href: '/privacy' },
-  ];
-
   return (
-    <div 
-      className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-500 ease-in-out ${
-        isScrolled ? 'pt-2 pb-2 bg-black/20 backdrop-blur-md' : 'pt-4 bg-transparent'
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 relative">
-        <header 
-          className={`relative z-50 flex items-center justify-between gap-3 rounded-full border border-white/12 px-4 py-3 transition-all duration-500 ease-in-out ${
-            isScrolled 
-              ? 'bg-[linear-gradient(180deg,rgba(22,20,18,0.95),rgba(12,11,10,0.9))] shadow-[0_8px_30px_rgb(0,0,0,0.3)] backdrop-blur-xl' 
-              : 'bg-[linear-gradient(180deg,rgba(22,20,18,0.82),rgba(12,11,10,0.72))] backdrop-blur-xl'
-          }`}
-        >
+    <>
+      {/* --- TOP NAVBAR (Sticky) --- */}
+      <div className="sticky top-0 z-50 mx-auto max-w-7xl px-3 pt-3 sm:px-4 lg:px-8">
+        <header className="mx-auto flex items-center justify-between gap-3 rounded-full border border-white/12 bg-[linear-gradient(180deg,rgba(22,20,18,0.82),rgba(12,11,10,0.72))] px-3 py-3 shadow-[0_18px_60px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all duration-500 sm:px-4 md:px-6 lg:gap-6">
           
-          {/* Left Side: Mobile Menu Button & Brand */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-1.5 text-white/88 hover:text-white transition-transform active:scale-95 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              <div className="relative h-6 w-6">
-                <svg 
-                  className={`absolute inset-0 h-6 w-6 transition-all duration-300 ease-in-out ${
-                    isMobileMenuOpen ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'
-                  }`} 
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg 
-                  className={`absolute inset-0 h-6 w-6 transition-all duration-300 ease-in-out ${
-                    isMobileMenuOpen ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'
-                  }`} 
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </button>
-
-            <Link href="/" className="hidden sm:block text-[10px] lg:text-sm tracking-[0.15em] lg:tracking-[0.26em] text-white/88 font-medium whitespace-nowrap hover:text-white transition-colors">
-              THE NEXT HOLIDAY CLASSIC
+          {/* Brand Logo (Visible on ALL screens) */}
+          <div className="shrink-0 text-[10px] tracking-[0.22em] sm:text-sm sm:tracking-[0.26em]">
+            <Link href="/" className="text-white/88 transition-colors hover:text-[#d6b56a]">
+              THE NEXT <br className="sm:hidden" /> HOLIDAY CLASSIC
             </Link>
           </div>
 
-          {/* Center: Desktop Navigation */}
-          <nav className="hidden md:flex flex-1 items-center justify-center gap-1 lg:gap-3 text-sm text-white/80">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                className="rounded-full border border-transparent px-3 lg:px-4 py-2 hover:border-[#d6b56a] transition-colors duration-300"
-              >
-                {link.name}
-              </Link>
-            ))}
+          {/* Desktop Navigation (Hidden on mobile) */}
+          <nav className="hidden flex-1 items-center justify-center gap-2 text-sm text-white/80 md:flex lg:gap-3">
+            <Link 
+              href="/#criteria"
+              className="rounded-full border border-white/12 px-4 py-2 transition-all duration-300 hover:border-[#d6b56a] hover:bg-white/5 hover:text-white"
+            >
+              Judging Criteria
+            </Link>
+            <Link 
+              href="/#listen"
+              className="rounded-full border border-white/12 px-4 py-2 transition-all duration-300 hover:border-[#d6b56a] hover:bg-white/5 hover:text-white"
+            >
+              Semifinalists
+            </Link>
+            <Link 
+              href="/#podcast"
+              className="rounded-full border border-white/12 px-4 py-2 transition-all duration-300 hover:border-[#d6b56a] hover:bg-white/5 hover:text-white"
+            >
+              Podcast
+            </Link>
+            <Link 
+              href="/#judges"
+              className="rounded-full border border-white/12 px-4 py-2 transition-all duration-300 hover:border-[#d6b56a] hover:bg-white/5 hover:text-white"
+            >
+              Judges
+            </Link>
+            <Link 
+              href="/rules"
+              className="rounded-full border border-white/12 px-4 py-2 transition-all duration-300 hover:border-[#d6b56a] hover:bg-white/5 hover:text-white"
+            >
+              Rules
+            </Link>
           </nav>
 
-          {/* Right Side: CTA Button */}
-          <Link
+          {/* Desktop CTA Button (Hidden on mobile, replaced by bottom bar "Enter") */}
+          <Link 
             href="/submit"
-            className="whitespace-nowrap rounded-full bg-[linear-gradient(180deg,#f7e7b0,#d6b56a)] px-4 py-2 text-xs font-medium text-black sm:px-5 sm:py-2.5 sm:text-sm transition-transform hover:scale-105 shadow-md"
+            className="hidden shrink-0 rounded-full bg-[linear-gradient(180deg,#f7e7b0,#d6b56a)] px-4 py-2 text-xs font-semibold text-black transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(214,181,106,0.4)] md:inline-flex sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Submit a Song
           </Link>
-        </header>
 
-        {/* Smooth Mobile Dropdown Menu */}
-        <div 
-          className={`absolute left-4 right-4 z-40 md:hidden origin-top transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-            isScrolled ? 'top-[4.5rem]' : 'top-[5.5rem]'
-          } ${
-            isMobileMenuOpen 
-              ? 'visible translate-y-0 scale-100 opacity-100' 
-              : 'invisible -translate-y-4 scale-95 opacity-0'
-          }`}
-        >
-          <div className="rounded-2xl border border-white/12 bg-[#0c0b0a]/95 p-4 backdrop-blur-xl shadow-2xl">
-            <Link 
-              href="/"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="block mb-4 sm:hidden border-b border-white/10 pb-4 text-center text-[10px] tracking-[0.2em] text-white/88 hover:text-white transition-colors"
-            >
-              THE NEXT HOLIDAY CLASSIC
-            </Link>
-            
-            <nav className="flex flex-col gap-1 text-sm text-white/80">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="rounded-xl px-4 py-3 hover:bg-white/10 hover:text-white transition-colors duration-200"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </div>
+        </header>
+      </div>
+
+      {/* --- MOBILE BOTTOM BAR (Fixed) --- */}
+      <div className="fixed bottom-3 left-3 right-3 z-50 animate-[mobileBarRise_0.35s_ease-out] rounded-[1.5rem] border border-white/10 bg-[linear-gradient(180deg,rgba(22,20,18,0.96),rgba(12,11,10,0.96))] px-3 py-2 shadow-[0_18px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl md:hidden">
+        <div className="grid grid-cols-5 gap-2 text-center text-[11px] text-white/75">
+          <Link 
+            href="/rules" 
+            className="flex items-center justify-center rounded-xl px-1 py-2 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            Rules
+          </Link>
+          <Link 
+            href="/#listen" 
+            className="flex items-center justify-center rounded-xl px-1 py-2 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            Listen
+          </Link>
+          <Link 
+            href="/#podcast" 
+            className="flex items-center justify-center rounded-xl px-1 py-2 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            Podcast
+          </Link>
+          <Link 
+            href="/#judges" 
+            className="flex items-center justify-center rounded-xl px-1 py-2 transition-colors hover:bg-white/5 hover:text-white"
+          >
+            Judges
+          </Link>
+          <Link 
+            href="/submit" 
+            className="flex items-center justify-center rounded-xl bg-[#d6b56a] px-1 py-2 font-medium text-black transition-transform hover:scale-105"
+          >
+            Enter
+          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 }
